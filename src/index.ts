@@ -389,7 +389,9 @@ async function botstart(){
   }
 
 
-  }catch{}
+  } catch(e:any){
+    console.log(e.message)
+  }
 
 }
 
