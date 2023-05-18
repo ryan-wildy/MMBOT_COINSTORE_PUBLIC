@@ -373,7 +373,7 @@ async function botstart(){
   if(diff >= 2/(10^decimalplaces)){
     let x = depth_b+(1/(10^decimalplaces))
     x += Math.random()*(diff-(1/(10^decimalplaces)))
-    x = Math.floor(x*10^decimalplaces)/10^decimalplaces
+    x = Math.floor(x*(10^decimalplaces))/10^decimalplaces
     console.log('random trade price - '+x)
     let random_volume = Math.floor(Math.random()*Math.floor(rand_trade_size_usd/x))
     console.log('coin volume - '+random_volume)
@@ -398,9 +398,21 @@ async function botstart(){
 
 let n = 0
 let sum_wldy = 0
-orders_to_do.push({price:base_price*(1 - (order_levels_percentage/100)),amountusd:floor_support_usd,amountwldy:Math.floor(floor_support_usd/(Math.floor(base_price*(1 - (order_levels_percentage/100))*10^decimalplaces)/10^decimalplaces)),side:'BUY',orderid:''})
+
+
+
+let price1 = base_price*(1 - (order_levels_percentage/100))
+console.log(price1)
+price1 = Math.floor(price1*(10^decimalplaces))
+console.log(price1)
+price1 = price1/(10^decimalplaces)
+console.log(price1)
+orders_to_do.push({price:price1,amountusd:floor_support_usd,amountwldy:Math.floor(floor_support_usd/(Math.floor(base_price*(1 - (order_levels_percentage/100))*10^decimalplaces)/10^decimalplaces)),side:'BUY',orderid:''})
 while(n < num_of_orders){
-  let o1 = {price:Math.floor(base_price*10^decimalplaces)/10^decimalplaces,amountusd:amountusd,amountwldy:Math.floor(amountusd/(Math.floor(base_price*10^decimalplaces)/10^decimalplaces)),side:'unknown',orderid:''}
+  price1 = base_price
+  price1 = Math.floor(price1*(10^decimalplaces))
+  price1 = price1/(10^decimalplaces)
+  let o1 = {price:price1,amountusd:amountusd,amountwldy:Math.floor(amountusd/price1),side:'unknown',orderid:''}
   orders_to_do.push(o1)
   sum_wldy += o1.amountwldy
   base_price *= (1 + (order_levels_percentage/100))
