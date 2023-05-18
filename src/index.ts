@@ -376,6 +376,7 @@ async function botstart(){
     x = Math.floor(x*10^decimalplaces)/10^decimalplaces
     console.log('random trade price - '+x)
     let random_volume = Math.floor(Math.random()*Math.floor(rand_trade_size_usd/x))
+    console.log('coin volume - '+random_volume)
 
     if(Math.random() < 0.8){
 
@@ -405,6 +406,10 @@ while(n < num_of_orders){
   base_price *= (1 + (order_levels_percentage/100))
   n+=1
 }
+
+console.log(orders_to_do[0])
+console.log(orders_to_do[1])
+console.log(orders_to_do[2])
 
 
 async function botloop(){
